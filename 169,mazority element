@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+       int me=nums[0],count=1;
+       int size=nums.size();
+       for(int i=1;i<size;i++){
+        if(me==nums[i]){
+            count++;
+        }else{
+            count--;
+        }if(count==0){
+            me=nums[i];
+            count=1;
+        }
+    
+    }
+    return me;
+    }
+};
