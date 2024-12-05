@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+class Solution {
+public:
+    vector<int> findDisappearedNumbers(vector<int>& nums) {
+        int n=nums.size();
+
+        for(int i=0;i<n;i++){
+            while(nums[i]!=nums[nums[i]-1]){        //correct position set
+                swap(nums[i],nums[nums[i]-1]);
+            }
+        }
+        vector<int>miss_nums;
+        for(int i=0;i<n;i++){
+            if(nums[i]!=i+1){
+                miss_nums.push_back(i+1); // if i=2 return i+1=3
+            }
+        }
+        return miss_nums;
+    }
+};
