@@ -1,0 +1,13 @@
+#include<algorithm>
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+        set<int>unique(nums.begin(),nums.end());
+
+        if(unique.size()<3){
+            return *unique.rbegin();
+        }
+        vector<int>res(unique.begin(),unique.end());
+        return res[res.size()-3];
+    }
+};
