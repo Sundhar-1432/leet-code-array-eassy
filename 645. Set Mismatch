@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        int n=nums.size();
+        int exp_sum=n*(n+1)/2;
+        unordered_set<int>set(nums.begin(),nums.end());
+        int arr_sum=0,uniq_sum=0;
+        for(int num:nums){
+            arr_sum+=num;
+        }
+        for(int num:set){
+            uniq_sum+=num;
+        }
+        int miss=exp_sum-uniq_sum;
+        int dup=arr_sum-uniq_sum;
+
+        return{dup,miss};
+    }
+};
