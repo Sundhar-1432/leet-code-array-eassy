@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int findShortestSubArray(vector<int>& nums) {
+        unordered_map<int,int>freq;
+        unordered_map<int,int >ftindex;
+        unordered_map<int,int >ltindex;
+
+        for(int i=0;i<nums.size();i++){
+            freq[nums[i]]++;
+            if(ftindex.find(nums[i])==ftindex.end()){
+                ftindex[nums[i]]=i;
+            }
+            ltindex[nums[i]]=i;
+            
+        }
+
+        int degree=0;
+        for(auto fq:freq){
+            degree=max(fq.second,degree);
+        }
+        int min_len=nums.size();
+        for(auto fq:freq){
+            if(fq.second==degree){
+                int num=fq.first;
+                min_len=min(min_len,ltindex[num]-ftindex[num]+1);
+            }
+        }
+    return min_len;
+    }
+};
