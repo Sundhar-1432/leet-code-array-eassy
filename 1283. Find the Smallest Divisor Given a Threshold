@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int possible(int divisor,vector<int>& nums, int threshold){
+        int sum=0;
+        for(int i=0;i<nums.size();i++){
+            sum+=ceil((double)nums[i]/(double)divisor);
+        }
+        return sum<=threshold;
+    } 
+    int smallestDivisor(vector<int>& nums, int threshold) {
+        int left=1,right=INT_MIN;
+        for(int i=0;i<nums.size();i++){
+            right=max(right,nums[i]);
+            left=min(left,nums[i]);
+        }
+        int res=1;
+        while(left<=right){
+            int mid=(left+right)/2;
+            if(possible(mid,nums,threshold)){
+                res=mid;
+                right=mid-1;
+            }else left=mid+1;
+        }
+    return res;
+    }
+};
