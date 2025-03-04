@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int least_day(vector<int>& weights,int wet){
+        int load=0,day=0;
+        for(int i=0;i<weights.size();i++){
+            if(load+weights[i]>wet){
+                day+=1;
+                load=weights[i];
+            }else load+=weights[i];
+        }
+        return day;
+    }
+    int shipWithinDays(vector<int>& weights, int days) {
+       int st_wet=weights[0],lar=0;
+       for(int i=0;i<weights.size();i++){
+            st_wet=max(st_wet,weights[i]);
+            lar+=weights[i];
+       }
+       while(st_wet<=lar){
+        int mid=(st_wet+lar)/2;
+        int day=least_day(weights,mid);
+        if(day<days){
+            lar=mid-1;
+        }
+        else st_wet=mid+1;
+       }
+       return st_wet;
+    }
+};
